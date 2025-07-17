@@ -1,0 +1,46 @@
+Terminal emulation: ADM-31
+
+disk images cpmtoolsgui, HxC:
+
+diskdef pc8801
+seclen 256
+tracks 80
+sectrk 16
+blocksize 2048
+maxdir 64
+skew 0
+boottrk 4
+os 2.2
+end
+
+HxC:
+
+40         number_of_track    
+2          number_of_side    
+IBM_MFM    format    
+1          start_sector_id    
+16         sector_per_track    
+256        sector_size    
+255        gap3    
+250000     bitrate    
+0          pregap    
+300        rpm    
+
+disk image from mame software list		
+		
+must use pc8801 with dipswitch set to 'n-basic' to boot. pc8801 requires dipswitch set to 'n88-basic' so, using mame270(doesn't work for 8801...so...) for 8001, and mame174 for 8801.
+
+unlike the 8801, these disk images won't work after conversion or editing.
+
+if I export anything as .MFM it works(maybe this will work for other systems)! So I am using .MFM. .MFM is nonhexeditable because nothing can be found, however, you can export the .MFM to .IMD then hexedit, then export back to .MFM. Export to .IMG, edit (PUT only) then export .IMG to .MFM. On this system, with cpmtoolsgui, you can delete and write(PUT), you cannot copy files(GET) from disks, they are corrupted. Must reload .MFM through mame ui(TAB)("empty slot" then select same image again) to enable read/write. then you must reset(F3) for disk to be read/write. then copy files with pip, and/or rename, delete etc. (submit.com to s.com for example) WORKING!!! (pain in the ass)
+
+
+run auto-st.com on .MFM in read/write mode to set startup. first select option 3 (typematic for autostart) then "SUBMIT PROFILE" for autostart. exit emulator, load .MFM in HxC, export as .IMG, add file with cpmtoolsgui, load raw file in HxC, export .MFM
+
+
+mame command (with automation):
+
+mame pc8801 -window -nomaximize -flop1 "[path to disk image]" -enable_ui -autoboot_delay 20 -autoboot_command \n\n
+
+Used mame270. Cp/m hangs on the pc8001 emulator in mame, so you must use pc8801. After first boot only: you must invoke the mame menu(TAB) and select "DIP switches" and change "BASIC" to "N-BASIC"(from "N88-BASIC") If you use this system for pc8801 then you must switch back to "N88-BASIC". You'll have to do this everytime you switch systems. To automate, you could add some lines to the .BAT file to copy configs for each system.
+
