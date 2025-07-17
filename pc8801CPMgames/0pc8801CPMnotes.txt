@@ -1,0 +1,45 @@
+terminal emulation: ADM-3A
+
+disk images: 
+
+cpmtools:
+
+diskdef pc8801
+seclen 256
+tracks 80
+sectrk 16
+blocksize 2048
+maxdir 64
+skew 0
+boottrk 4
+os 2.2
+end
+
+HxC:
+
+40       number_of_track  
+2        number_of_side  
+IBM_MFM  format  
+1        start_sector_id  
+16       sector_per_track  
+256      sector_size  
+0        formatvalue  
+255      gap3  
+250000   bitrate  
+0        pregap  
+300  rpm  
+
+images from Mame pc8801 software list
+
+Workflow:
+
+Straight forward system, no problems. Export to .IMG with HxC, edit .IMG with cpmtoolsgui, load raw image in HxC, export to .IMD.
+
+SUBMIT.COM already on disk named S.COM. Hex edited image for classic startup using "S PRO" instead of "SUBMIT PROFILE", so edit PRO.SUB for startup. As usual, cpm22 requires padding in .SUB files, so extract and edit existing .SUB file.
+
+Mame command line:
+pc8001 must use pc8801 with dipswitch set to 'n-basic' to boot. pc8801 requires dipswitch set to 'n88-basic' so, using mame270 for 8001 and mame174 for 8801.
+
+mame pc8801 -flop1 "[path to disk image]"
+
+mame174

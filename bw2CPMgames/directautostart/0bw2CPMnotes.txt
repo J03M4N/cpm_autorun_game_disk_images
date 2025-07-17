@@ -1,0 +1,58 @@
+Cool laptop with built-in low profile LCD that nevertheless has an 80x24 display!
+
+TERMINAL Emulation: ADM-3A
+
+1Ah or ESC-*	Clear screen and Home cursor
+1Eh	Home cursor
+0Ch	Cursor right
+08h	Cursor left / backspace
+0Bh	Cursor up
+0Ah	Cursor down / LF
+ESC-T	Clear EOL
+ESC-Y	Clear EOS
+ESC-R	Delete line
+ESC-E	Insert line
+ESC-I	Inverse character
+ESC-N	Normal character
+ESC-G	Start graphic
+
+diskimage: cpmtoolsgui, HxC:
+
+diskdef BW2
+  seclen 256
+  tracks 80
+  sectrk 18
+  blocksize 2048
+  maxdir 128
+  skew 0
+  boottrk 2
+  os 2.2
+end
+
+HxC:
+
+80       number_of_track  
+1        number_of_side  
+IBM_MFM  format  
+0        start_sector_id  
+18       sector_per_track  
+256      sector_size  
+0        formatvalue  
+255      gap3  
+250000   bitrate  
+0        pregap  
+300      rpm  
+
+Disk image from mame bw2 software list.
+
+Workflow: typical, load initial image with HxC, export .IMG, use cpmtoolsgui to edit .IMG, reload raw image in HxC, export to .IMD
+
+hexedited initial image to support "SUBMIT PROFILE", works fine.
+.SUB file must be padded, extract and edit PROFILE.SUB from disk.
+
+MAME COMMAND LINE:
+
+mame bw2 -flop1 "[path to disk image]" -skip_gameinfo -natural -window -nomaximize -autoboot_delay 3 -autoboot_command \n
+
+mame174 disk error
+mame270 works
