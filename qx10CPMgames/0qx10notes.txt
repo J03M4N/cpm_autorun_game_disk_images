@@ -1,0 +1,25 @@
+terminal: ADM-31
+
+disk images: CPMtoolsGUI, CIFE ,HxC:
+
+diskdef qx10
+	seclen 256
+	tracks 82
+	sectrk 16
+	blocksize 2048
+	maxdir 64
+	offset 32768
+	skew 1
+	boottrk 0
+	os 2.2
+end 
+
+There is a program on boot disk called autost.com that you can use to set an autostart. 
+You must first reload the boot disk through mame menu to force the disk read option dialogue, select "read from this image and write to another". Use backspace to rename to .mfm file and save as .mfm, then set autostart using autost.com. Your final file is an .mfm. use HxC to load .mfm and export to .imd. After this it is easy to find the autostart with hex editor. A whole block must be copied to zero out the garbage.
+SUBMIT PROFILE works as startup, PROFILE.SUB must be padded, extract and edit the existing one.
+
+MAME minimal command line:
+
+mame64 qx10 -flop1 "[path to disk image]"
+
+

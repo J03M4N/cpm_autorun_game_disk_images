@@ -1,0 +1,37 @@
+terminal: ADM-31...mostly, a few games just won't work right.
+
+disk images: Cpmtoolsgui HxC:
+
+diskdef smc70
+  seclen 256
+  tracks 70
+  sectrk 16
+  blocksize 2048
+  maxdir 64
+  skew 3
+  boottrk 2
+  os 2.2
+end
+
+HxC:
+<number_of_track>70</number_of_track>
+<number_of_side>1</number_of_side>
+<format>IBM_MFM</format>
+<start_sector_id>1</start_sector_id>
+<sector_per_track>16</sector_per_track>
+<sector_size>256</sector_size>
+<formatvalue>0</formatvalue>
+<gap3>255</gap3>
+<bitrate>250000</bitrate>
+<pregap>0</pregap>
+<rpm>300</rpm>
+		
+disk image from mame softlist
+
+workflow: had to remount for "read this image write to another" dialogue, rename to .MFM. ran setup to set colors, cursor and autostart, set autostart to "SUBMIT PROFILE" works perfect, just edit "PROFILE.SUB" (needs to be padded as usual in cpm2.2). then loaded the newly created .MFM with HxC and exported as .IMD Used new .IMD as source disk for standard workflow
+
+mame command line:
+
+mame64 smc777 -flop1 "[path to disk image]"		
+		
+		
