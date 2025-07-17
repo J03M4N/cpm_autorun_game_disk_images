@@ -1,0 +1,42 @@
+terminal: ADM-31
+
+disk images: cpmtoolsgui, HxC:
+
+diskdef:
+
+diskdef mz2000
+seclen 256
+tracks 80
+sectrk 16
+blocksize 2048
+maxdir 64
+skew 1
+boottrk 4
+os 2.2
+end
+
+
+HxC:
+
+40      number_of_track       
+2       number_of_side       
+IBM_MFM format       
+1       start_sector_id       
+16      sector_per_track       
+256     sector_size       
+0       formatvalue       
+255     gap3       
+250000  bitrate       
+0       pregap       
+300     rpm       
+
+work flow: load .D88 boot image in HxC, export to .IMG, edit .IMG with CPMtoolsGUI, reload .IMG in HxC, export to .IMD.
+
+standaqrd autorun was setup to run "setup -g" keyboard wouldn't work without it.
+hexedit replaced "setup -g" with "submit profile". works, must start with "setup -g" in first line of PROFILE.SUB
+
+disk image from: mame software list
+
+mame command line:
+
+mame mz2000 -flop1 "[path to disk image]" -window -nomaximize

@@ -1,0 +1,13 @@
+terminal: 
+
+disk images: steinblume
+
+use spckorvet emulator
+
+mame boots, but hangs at "25.COM" which puts it in 80 column mode, which must be used for these old generic cp/m games, so, mame is out. 
+
+ran into problem, warm start does cold start so couldn't use usual hex edit, but a blank boot disk tried to run "AUTO" renamed submit.com to s.com and profile.sub to pr.sub hexedit replaced "AUTO" with "S PR" for a working autorun.
+
+disk image from:
+
+mame command line: no mame use spckorvet
