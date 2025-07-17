@@ -1,0 +1,12 @@
+terminal emulation: ANSI, kinda, 
+only 65 characters wide, looking for an 80 column emulator. dsp314.com looks like it supports 80 column, but when anything is chosen, it freezes in mame(2016) and mame270.
+
+red box warning can't be skipped and you must press F6 at startup, haven't had any luck automating either.
+
+disk images: SteinBlume:
+
+image from mame software list, seems to be the only cp/m image available for this system.
+
+profile.sub works
+
+F4 for ctrl-c
