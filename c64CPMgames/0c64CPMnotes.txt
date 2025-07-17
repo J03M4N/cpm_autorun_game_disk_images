@@ -1,0 +1,25 @@
+Terminal: ADM-3A/Kaypro II/TeleVideo 920
+
+Disk images: Ctools:
+Ctools supports .D71 and .D64
+
+Only .D64 CP/M boot images work as data or boot images, only 1541 supported.
+Thanks to Luis Felipe Antoniosi for expanding memory from 44k to 48k, and patching Chris Lampton's SOFT80.COM for white-on-black, Kaypro 2X emulation, and making it autorun on the bootdisk. 
+
+Bootdisk can support 2 drives using a basic patch I found on 3 or 4 websites, this patch permanently alters the next CP/M disk booted. Run the patch, boot the disk, disk is now permanently setup for 2 drives. (I made the loader because I originally assumed that the patch had to be ran before every boot...not so. Now the loader just changes colors, except the 40 column Bambi demo, it also patches the character set)
+
+I hexedited the bootdisk to autorun SUBMIT.COM PROFILE.SUB (like CP/M 3). Slows things down, but works good. Edit PROFILE.SUB to setup autorun. Like most cpm2.2, PROFILE.SUB must be padded, so extract and edit existing. You can still hex edit the image to direct load which is faster, but less elegant (autorun only on the 80 col boot disk so far, no autorun on the 40 col boot disk).
+
+I added a loader to the boot disk to set the colors to white-on-black, so both 40 column mode and 80 column mode are the same color, and to fix the character set in 40 column mode (thanks to Marcello's Retro64 blog). TVBIOS.COM by Ross A.Alford sets up terminal emulation for 40 col mode, will not run on 80 col boot disk, so separate 40 col and 80 col boot disks required. Haven't figured out how to do autorun on the 40 col boot disk. Luis must've done something esoteric when he created the 80 col boot disk. Classic autorun works, but is invoked during warmstart, so only good for stuff like DIR or STAT or TYPE etc.
+
+Emulation requires CP/M cartridge which is supported by both MAME and VICE.
+
+MAME command line:
+
+mame c64p -cart cpm -flop1 "[path to CP/M boot disk image]" -iec9 c1541 -flop2 "[path to CP/M data disk image]" -window -autoboot_delay 3 -autoboot_command load\"*\",8\n\n\n\n\n\nrun\n 
+
+VICE command line:
+
+x64sc -cpmcart -8 "[path to CP/M boot disk image]" -drive9type 1541 -9 "[path to CP/M data disk image]" -keybuf load\"*\",8\n\n\n\n\nrun\n
+
+
