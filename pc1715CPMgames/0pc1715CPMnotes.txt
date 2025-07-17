@@ -1,0 +1,32 @@
+Terminal emulation: pc-1715 native one-of-a-Kind, weird and unusual and difficult (but better thab ANSI)
+
+clear screen  0C
+position      1B (80h offset (3x2 vs 4x3? position of y,x in string)
+erase EOL     16 54
+
+disk image: cpmtools, HxC.
+
+ diskdef 17153
+  seclen 1024
+  tracks 160
+  sectrk 5
+  blocksize 2048
+  maxdir 128
+  skew 0
+  boottrk 4
+  os 3
+end
+
+84      tracks
+2       sides
+5       sectors
+1       id
+0       format
+ibm mfm type
+255     gap3
+
+diskimage:g1715.cpm
+bin2imd.com g1715.cpm games.imd /2 DM=4 N=80 SS=1024 SM=1-5
+
+standard workflow. cpm3 uses profile.sub 
+

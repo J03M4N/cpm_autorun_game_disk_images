@@ -1,0 +1,39 @@
+Terminal emulation: supposedly VT100, some things work perfectly, others won't work at all.
+
+disk manipulation: cpmtoolsgui, HxC:
+
+diskdef rainbow
+  seclen 512
+  tracks 80
+  sectrk 10
+  blocksize 2048
+  maxdir 128
+  skew 2
+  boottrk 2
+  #offset 10240
+  os 2.2
+end
+
+HxC:
+
+80       number_of_track  
+1        number_of_side  
+IBM_MFM  format  
+1        start_sector_id  
+10       sector_per_track  
+512      sector_size  
+0        formatvalue  
+255      gap3  
+250000   bitrate  
+0        pregap  
+300      rpm  
+
+disk images from daves old computers. the cpm 80-86 image
+
+standard work flow, standard startup hex editing image file with 'SUBMIT PROFILE'
+
+mame startup:
+
+mame rainbow -flop1 "C:\Shared_Folders\DOS\rain\raw.IMD" -ramsize 640k -autoboot_delay 26 -autoboot_command A -window
+
+doesn't work with mame(2016)	
