@@ -1,0 +1,39 @@
+Terminal Emulation: vt180
+
+clear screan ^[2J      (1B 5B 32 4A
+position     ^=20;20H  (1B 3D (y+20h)(x+20h) ) 20h offset
+
+disk images: cpmtoolsgui, HxC:
+
+diskdef v1050
+  seclen 512
+  tracks 80
+  sectrk 10
+  blocksize 2048
+  maxdir 128
+  skew 0
+  boottrk 2
+  os 3
+end
+
+HxC:
+
+80       number_of_track    
+1        number_of_side    
+IBM_MFM  format    
+1        start_sector_id    
+10       sector_per_track    
+512      sector_size    
+0        formatvalue    
+255      gap3    
+300000   bitrate    
+0        pregap    
+300      rpm    
+
+images from mame software list
+
+standard work flow, cpm3, so autostart built-in, just edit profile.sub
+
+mame command line:
+
+mame v1050 -window -nomaximize -flop1 "path to disk image"

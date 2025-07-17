@@ -1,0 +1,7 @@
+boot with working bootdisk, mount read this/write to other save as mfm disk
+all files can be deleted from bootdisk
+use HxC to convert a disk to img and cpmtools to put files, load img in HxC and save as imd (not bootable)
+mount non-bootable with new file as drive b:
+copy files from b to a
+copy boot disk and rename to game disk
+hex edit disk to make it autoboot
