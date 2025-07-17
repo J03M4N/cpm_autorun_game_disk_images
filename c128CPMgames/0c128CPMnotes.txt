@@ -1,0 +1,13 @@
+Terminal Emulation: enhanced ADM-3A with color support
+
+disk images: ctools.
+
+ctools supports .D64 and .D71 images. for .D81 I used an existing image in VICE emulator and copied files from .D71s prepared by ctools.
+
+uses cpm3.0 (plus), so profile.sub support is built in, just edit "PROFILE.SUB" for autostart.
+
+disk image from:
+
+mame startup:
+
+vice startup:
