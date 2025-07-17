@@ -1,0 +1,39 @@
+terminal emulation: ADM-31?
+
+disk images cpmtoolsgui, HxC:
+
+diskdef x1
+seclen 256
+tracks 80
+sectrk 16
+blocksize 2048
+maxdir 64
+skew 0
+boottrk 4
+os 2.2
+end
+
+HxC:
+
+40       number_of_track  
+2        number_of_side  
+IBM_MFM  format  
+1        start_sector_id  
+16       sector_per_track  
+256      sector_size  
+0        formatvalue  
+255      gap3  
+250000   bitrate  
+0        pregap  
+300      rpm  
+
+image from mame x1 software list: cpm22.d88
+
+workflow:
+Very simple system to get running, I didn't have to fight with anything, created my own diskdef, and it worked the first try! (scanned with existing diskdef to find one that read the dir, then tweaked it from there).
+load image with HxC, export to .IMG, edit with cpmtoolsgui, reload raw image with HxC, export to .IMD 
+just rename file you wish to autorun to STARTUP.COM 
+
+mame command:
+
+mame x1 -flop1 "[path to disk image]" -skip_gameinfo -natural -window -nomaximize

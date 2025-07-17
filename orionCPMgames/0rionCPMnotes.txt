@@ -1,0 +1,39 @@
+terminal: vt52
+
+ESC A 	Cursor up 	Move cursor one line upwards.
+ESC B 	Cursor down 	Move cursor one line downwards.
+ESC C 	Cursor right 	Move cursor one column to the right.
+ESC D 	Cursor left 	Move cursor one column to the left.
+ESC E 	Clear screen 	Clear screen and place cursor at top left corner.
+ESC H 	Cursor home 	Move cursor to the upper left corner.
+ESC I 	Cursor up and insert 	Move cursor one line upwards and scroll.
+ESC J 	Clear to end of screen 	Clear screen from cursor onwards.
+ESC K 	Clear to end of line 	Clear line from cursor onwards.
+ESC L 	Insert line 	Insert a line.
+ESC M 	Delete line 	Remove line.
+ESC Y <y> <x> 	Set cursor position 	Position cursor.
+ESC b <c> 	Foreground color 	Set text color.
+ESC c <c> 	Background color 	Set background color.
+ESC d 	Clear to start of screen 	Clear screen up to cursor.
+ESC j 	Save cursor position 	"Remember" cursor.
+ESC k 	Restore cursor position 	Restore cursor.
+ESC l 	Clear line 	Clear current line.
+ESC o 	Clear to start of line 	Clear current line up to cursor.
+ESC p 	Reverse video 	Switch on inverse video text.
+ESC q 	Normal video 	Switch off inverse video text.
+ESC v 	Wrap on 	Enable line wrap.
+ESC w 	Wrap off 	Disable line wrap.
+ESC e 	Cur_on 	Show cursor.
+ESC f 	Cur_off 	Hide cursor.
+
+disk images: steinblume
+
+work flow:
+Uses AUTOEXEC.BAT for autostart, so just edit it, the first two commands in the autoexec.bat are needed to setup 80 columns and english.
+
+disk image from Mame software list
+
+mame command line:
+
+mame64 orionz80 -flop1 "[path to disk image]" -bios m33zrkd
+
