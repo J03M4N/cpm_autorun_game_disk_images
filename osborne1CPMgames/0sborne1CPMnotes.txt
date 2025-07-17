@@ -1,0 +1,28 @@
+terminal: osborne 1
+
+130 ' ---------------- Osborne I Terminal Commands -------------------
+140 '
+150 E$=CHR$(27):'                Escape Character
+160 CLS$=CHR$(26):'              Clear Screen
+170 DC$=E$+"=":'                 Direct Cursor Addressing
+180 GY$=E$+"g":'                 Graphics On
+190 GN$=E$+"G":'                 Graphics Off
+200 HO$=E$+CHR$(1):'            Cursor Home
+210 EP$=E$+"T":'                Erase to End of Line
+220 DY$=E$+")":'                DIM Display On
+230 DN$=E$+"(":'                DIM Display Off
+240 UY$=E$+"l":'                Start Underlining
+250 UN$=E$+"m":'                End Underlining
+
+disk images: cpmtoolsgui, HxC; 
+diskdef:
+
+
+HxC:
+work flow:
+not 80x24, but has a utility to switch, lots of cool proprietary ascii games.
+
+disk image from:
+mame command line:
+
+mame64 osborne1 -flop1 "[path to disk image]" -skip_gameinfo -autoboot_delay 1 -autoboot_command \n

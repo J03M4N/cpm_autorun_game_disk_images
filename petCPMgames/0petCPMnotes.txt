@@ -1,0 +1,57 @@
+terminal: ADM-31...mostly, a few games just won't work right.
+
+disk images: Cpmtools:
+
+# SoftBox disk for Commodore 4040 (D64 image)
+diskdef softbox-d64
+  seclen 128
+  tracks 39
+  sectrk 32
+  blocksize 2048
+  maxdir 64
+  skew 0
+  boottrk 0
+  os 2.2
+end
+
+# SoftBox disk for Commodore 8050 (D80 image)
+diskdef softbox-d80
+  seclen 128
+  tracks 125
+  sectrk 32
+  blocksize 2048
+  maxdir 64
+  skew 0
+  boottrk 0
+  os 2.2
+end
+
+# SoftBox disk for Commodore 8250 (D82 image)
+diskdef softbox-d82
+  seclen 128
+  tracks 253
+  sectrk 32
+  blocksize 4096
+  maxdir 128
+  skew 0
+  boottrk 0
+  os 2.2
+end
+
+CPMtoolsGUI can directly edit .D80 files
+
+hexedit modified the cpm22 bootdisk to autorun SUBMIT.COM PROFILE.SUB (like CP/M 3). Edit PROFILE.SUB to setup autorun.
+requires CP/M softbox in slot 11 which is supported by MAME.
+
+MAME command line:
+
+can be run with "pet8032", or just "softbox" both look very different.
+
+mame64 pet8032 -window -nomaximize -skip_gameinfo -natural -ieee11 softbox -flop1 "[path to softbox CP/M]" -autoboot_delay 1 -autoboot_command load\"k\",8\n\n\n\n\n\nrun\n
+
+or
+
+mame64 softbox -window -nomaximize -skip_gameinfo -natural -flop1 "[path to softbox CP/M]"
+
+
+ORBQUEST won't work, hard drive error?

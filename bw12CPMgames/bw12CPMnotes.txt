@@ -1,0 +1,56 @@
+terminal: ADM-3A mostly:
+
+1Ah or ESC-*	Clear screen and Home cursor
+1Eh	Home cursor
+0Ch	Cursor right
+08h	Cursor left / backspace
+0Bh	Cursor up
+0Ah	Cursor down / LF
+ESC-T	Clear EOL
+ESC-Y	Clear EOS
+ESC-R	Delete line
+ESC-E	Insert line
+ESC-I	Inverse character
+ESC-N	Normal character
+
+disk images: Cpmtools(gui) & HcX:
+
+diskdef bw12
+  seclen 256
+  tracks 40
+  sectrk 18
+  blocksize 2048
+  maxdir 64
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC image setting:
+40 tracks
+1 side
+18 sectors
+256 sector size
+0 sector id
+1 interleave
+0 skew
+0 format value
+255 gap3
+0 pregap
+
+images are from mame softwarelist
+there is cpm2.2 for bw12 & bw14(use bw12 for autostart)
+there is cpm3 for bm14, file xfers don't work (yet, so no images so far)
+
+workflow: load IMD in HxC, save .img, xfer files onto .img with cpmtoolsgui, load raw image in HcX, export IMD, test with emulator
+
+Couldn't get submit to work, but autorun is built-in. Rename .com file to autorun.com.
+Image can be hexedited to autorun basic by renaming mbasic.com and the *.bas file to equal 6 letters (+ a space = 7) ie "MB MENU" and hexedit replacing AUTORUN.
+
+MAME command line:
+
+mame bw12 -flop1 "[path to disk image]" -window -nomaximize -autoboot_delay 5 -autoboot_command \n\n\n
+
+mame2016 hangs, works in mame270
+
+
