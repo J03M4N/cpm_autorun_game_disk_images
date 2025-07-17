@@ -1,0 +1,37 @@
+terminal: ADM-31
+
+disk images: CPMtools:
+
+# Apple II CP/M skew o Apple II DOS 3.3 skew
+diskdef apple-do
+  seclen 256
+  tracks 35
+  sectrk 16
+  blocksize 1024
+  maxdir 64
+  skewtab 0,6,12,3,9,15,14,5,11,2,8,7,13,4,10,1
+  boottrk 3
+  os 2.2
+end
+
+# Apple II CP/M skew o Apple II PRODOS skew
+diskdef apple-po
+  seclen 256
+  tracks 35
+  sectrk 16
+  blocksize 1024
+  maxdir 64
+  skewtab 0,9,3,12,6,15,1,10,4,13,7,8,2,11,5,14
+  boottrk 3
+  os 2.2
+end
+
+diskimage: must be cp/m for softcard, haven't been able to get applicard working.
+mame requires softcard in slot 4.
+had to stick with .DSK format, couldn't get .IMD to boot. Didn't try very hard.
+
+MAME minimal command line:
+
+mame apple2e -sl4 softcard -flop1 [path to softcard CP/M boot disk image]
+
+

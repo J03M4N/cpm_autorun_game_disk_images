@@ -1,0 +1,42 @@
+terminal: uses mame default terminals, they have no terminal codes supported (that I know of), won't run the classics: aliens catchum ladder etc.
+
+disk images: Cpmtools(gui) & HcX:
+
+diskdef wav2
+  seclen 1024
+  tracks 160
+  sectrk 5
+  blocksize 2048
+  maxdir 128
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC image setting:
+
+40 tracks
+2 sides
+5 sectors per track
+1024 sector size
+1 sector id
+1 interleave
+1 skew
+250 rpm
+
+images are from mame softlist
+there is cpm2.2 for wmb file xfers don't work (yet, so no images so far)
+there is cpm3 for wmb that works. 
+
+workflow: load IMD in HxC, save .img, xfer files onto .img with cpmtoolsgui, load raw image in HcX, export IMD, test with emulator
+
+submit works, with profile.sub
+
+MAME command line:
+
+mame wmbullet -window -nomaximize -u55:0 525dd -flop1 "[path to disk image]"
+
+(slot is required because defaults don't match each other or disk)
+mame2016 hangs, works in mame270
+
+
