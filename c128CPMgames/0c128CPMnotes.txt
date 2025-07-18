@@ -9,7 +9,7 @@ uses cpm3.0 (plus), so profile.sub support is built in, just edit "PROFILE.SUB" 
 disk image from:
 
 mame startup: 
-mame c128 -flop1 "[path to cpmbootdisk]" -ui_active -window -numscreens 1 -screen0 "\\.\DISPLAY2" -view "screen 0 standard"
+mame c128 -flop1 "[path to cpmbootdisk]" -ui_active -window -view "screen 0 standard"
 
 vice startup:
 x128 -80col "[path to cpmbootdisk]"
