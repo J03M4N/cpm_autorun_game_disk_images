@@ -34,6 +34,6 @@ standard work flow, standard startup hex editing image file with 'SUBMIT PROFILE
 
 mame startup:
 
-mame rainbow -flop1 "C:\Shared_Folders\DOS\rain\raw.IMD" -ramsize 640k -autoboot_delay 26 -autoboot_command A -window
+mame rainbow -flop1 "[path to cpmbootdisk image]" -ramsize 640k -autoboot_delay 26 -autoboot_command A -window -view "screen 0 standard"
 
 doesn't work with mame(2016)	
