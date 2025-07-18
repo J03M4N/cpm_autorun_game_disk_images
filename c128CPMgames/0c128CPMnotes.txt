@@ -8,6 +8,8 @@ uses cpm3.0 (plus), so profile.sub support is built in, just edit "PROFILE.SUB" 
 
 disk image from:
 
-mame startup:
+mame startup: (horrible for 80 column mode I recommend Vice)
+mame c128 -flop1 "[path to cpmbootdisk]" -ui_active -window
 
 vice startup:
+x128 -80col "[path to cpmbootdisk]"
