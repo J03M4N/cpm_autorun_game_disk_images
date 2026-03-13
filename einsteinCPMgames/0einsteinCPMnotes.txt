@@ -1,0 +1,42 @@
+Terminal: dumb, so classics like Aliens, Catchum and Ladders etc. that require terminal emulation won't work. "ctrl L" clears screen.
+
+Cpmtools diskdef:
+
+diskdef einstein
+seclen 512
+tracks 40
+sectrk 10
+blocksize 2048
+maxdir 64
+skew 1
+boottrk 2
+os 2.2
+end
+
+HxC raw .IMG:
+
+40        number_of_tracks
+1         number_of_sides
+IBM_MFM   format
+0         start_sector_id
+10        sector_per_track
+512       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source boot disk from?
+
+Workflow: load .DSK in HxC, export raw .IMG, edit with CPMtoolsGUI, load RAW image in HxC using values from above, export to .DSK(cpc type). There is a filesize limitation of 16k, not sure why, but anything bigger won't show up in emulated system, which severely limits available games.
+
+Autorun: Another system that runs autostart on warmboot, so 'submit profile' won't work. Any autorun app that invokes warmboot at exit or if user invokes ^C, it will loop and restart. I used the autorun from alphatronic.
+ 
+
+*MAME276 command line:
+
+mame einstein -flop1 "[path to cpm bootdisk]" -window -nomaximize 
+-skip_gameinfo -pipe tk02 -view "screen 1 standard" -autoboot_delay 5 -autoboot_command 1
+
+*first time running, invoke UI, select 'Dip Switches', turn 'Startup Mode' to 'Automatic 80 Column', then select 'Reset System', then ESC to exit. This will write a .CFG file and only needs to be done once. 
