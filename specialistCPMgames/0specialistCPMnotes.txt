@@ -1,0 +1,15 @@
+Terminal: ANSI?, only 65 characters wide.
+
+Disk images: SteinBlume:
+
+Source cpm boot disk image from MAME software list.
+
+Autostart: 'PROFILE.SUB' works. You must include 'DSP314.COM' as first line in 'PROFILE.SUB'
+
+Emulation: You must press 'F6' during boot*, F4 for ctrl-C.
+
+MAME command line:
+
+mame specimx -flop1 "[path to cpm boot disk image]" -autoboot_delay 1 -autoboot_command \n -skip_gameinfo -window -nomaximize
+
+*This could be automated with a '.LUA' script?
