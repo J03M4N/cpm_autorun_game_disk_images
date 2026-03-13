@@ -1,0 +1,37 @@
+Terminal: dumb, so classics like Aliens, Catchum and Ladders etc. that require terminal emulation wont work. "ctrl L" clears screen.
+
+Cpmtools diskdef:
+
+diskdef wav2
+  seclen 1024
+  tracks 160
+  sectrk 5
+  blocksize 2048
+  maxdir 128
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+40 tracks
+2 sides
+5 sectors per track
+1024 sector size
+1 sector id
+1 interleave
+1 skew
+250 rpm
+
+Source boot disk images from MAME softlist
+
+Workflow: load IMD in HxC, save .img, xfer files onto .img with cpmtoolsgui, load raw image in HcX, export IMD, test with emulator
+
+Autostart: CPM3, so 'SUBMIT.COM' works with 'PROFILE.SUB'.
+
+MAME276 command line:
+
+mame wmbullet -window -nomaximize -skip_gameinfo -u55:0 525dd -flop1 "[path to disk image]"
+
+
