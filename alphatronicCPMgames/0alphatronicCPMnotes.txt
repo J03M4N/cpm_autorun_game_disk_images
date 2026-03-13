@@ -1,0 +1,42 @@
+terminal: vt52
+
+CPMtools diskdef:
+
+diskdef alpha
+  seclen 256
+  tracks 40
+  sectrk 32
+  blocksize 2048
+  maxdir 128
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+40        number_of_track
+2         number_of_side
+IBM_MFM   format
+1         start_sector_id
+16        sector_per_track
+256       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source boot disk image from MAME software list.
+
+Workflow: load .td0 (or.IMD) in HxC, export raw .IMG, edit with CPMtoolsGUI, load RAW image in HxC, export to .IMD. 
+
+Autostart: This system runs autostart at warmboot, so it uses a clever scheme for autostart. To implement this from the bootdisk, you must remount disk through UI, choose 'write to separate disk' and choose '.MFM', then use HxC to load .MFM, and export raw '.IMG', then use standard workflow, or you can hexedit at location 0x3360.
+
+Character set is messed up in MAME emulation.
+
+*MAME276 command line:
+
+MAME alphatro -flop1 "[path to cpm bootdisk]" -window -nomaximize -skip_gameinfo -autoboot_delay 5 -autoboot_command 1
+
+*This system defaults to no FDD installed, so the first time you run the system, invoke user interface, select 'Machine Configuration', change 'FDD unit installed' to "YES" and select 'Reset System', ESC to exit. This will create a '.cfg' file in MAME. This only needs to be once. CPM will now boot.
