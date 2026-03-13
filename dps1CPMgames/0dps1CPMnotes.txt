@@ -1,0 +1,38 @@
+Terminal: dumb, so classics like Aliens, Catchum and Ladders etc. that require terminal emulation won't work. "ctrl L" clears screen.  
+
+CPMtools diskdefs:
+diskdef DPS1
+  seclen 128
+  tracks 77
+  sectrk 26
+  blocksize 1024
+  maxdir 64
+  skew 6
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+77        number_of_track
+1         number_of_side
+IBM_FM    format
+1         start_sector_id
+26        sector_per_track
+128       sector_size
+0         formatvalue
+255       gap3
+500000    bitrate
+0         pregap
+360       rpm
+
+Source cpm boot disk image from MAME software list.
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD.
+
+Autorun: Another system that runs autostart on warmboot, so 'submit profile' won't work. Any autorun app that invokes warmboot at exit or if user invokes ^C, it will loop and restart. I used the autorun from alphatron.
+
+*MAME276 command line:
+
+mame dps1 -flop "[path to cpm boot disk image]" -emulated -window -nomaximize -skip_gameinfo -autoboot_delay 5 -autoboot_command 1
+
+*First time running, to stop double letters in MAME, invoke user interface, select 'Machine Configuration', turn 'Local Echo' 'off', select reset, and ESC to exit. This will write a .CFG file, and only needs to be done once.
