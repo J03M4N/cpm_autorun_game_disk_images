@@ -1,0 +1,41 @@
+terminal: ADM-31
+
+CPMtools diskdef:
+
+diskdef qx10
+	seclen 256
+	tracks 82
+	sectrk 16
+	blocksize 2048
+	maxdir 64
+	offset 32768
+	skew 1
+	boottrk 0
+	os 2.2
+end 
+
+HxC raw .IMG:
+
+41        number_of_track
+2         number_of_side
+IBM_MFM   format
+1         start_sector_id
+16        sector_per_track
+256       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source cpm boot disk image from Dave's old computers.
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD.
+
+Autostart: There is a program on boot disk called 'AUTOST.COM' that you can use to set an autostart. 
+You must first reload the boot disk through mame menu to force the disk read option dialogue, select "read from this image and write to another". Use backspace to rename to .MFM file and save as .MFM, then set autostart in CP/M using AUTOST.COM. Your final file is an .MFM. use HxC to load .MFM and export to .IMD. After this it is easy to find the autostart with hex editor. A whole block must be copied to zero out the garbage.
+SUBMIT PROFILE works as startup, PROFILE.SUB must be padded, extract and edit the existing one.
+
+MAME276 command line:
+
+mame64 qx10 -flop1 "[path to disk image]" -window -skip_gameinfo
