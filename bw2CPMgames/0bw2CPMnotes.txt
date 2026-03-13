@@ -1,0 +1,39 @@
+Terminal: ADM-3A
+
+Cpmtools diskdef:
+
+diskdef BW2
+  seclen 256
+  tracks 80
+  sectrk 18
+  blocksize 2048
+  maxdir 128
+  skew 0
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+80       number_of_track  
+1        number_of_side  
+IBM_MFM  format  
+0        start_sector_id  
+18       sector_per_track  
+256      sector_size  
+0        formatvalue  
+255      gap3  
+250000   bitrate  
+0        pregap  
+300      rpm  
+
+Source cpm boot disk image from MAME software list.
+
+Workflow: Load .IMD with HxC, export .IMG, use cpmtoolsgui to edit .IMG, 'load raw image' in HxC using values from above, export to .IMD
+
+Autostart: Hexedited initial image to support "SUBMIT PROFILE", works fine.
+.SUB file must be padded, extract and edit PROFILE.SUB from disk.
+
+MAME276 command line:
+
+mame bw2 -flop1 "[path to cpm boot disk image]" -skip_gameinfo -natural -window -nomaximize -autoboot_delay 3 -autoboot_command \n
