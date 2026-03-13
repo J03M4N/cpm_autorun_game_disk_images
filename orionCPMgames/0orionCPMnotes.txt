@@ -1,0 +1,13 @@
+Terminal: VT52
+
+disk images: Steinblume
+
+Source cpm boot disk image from MAME software list.
+
+Workflow: Steinblume edits .ODI disk directly, no conversion required.
+
+Autostart: Uses AUTOEXEC.BAT for autostart, so just edit it, the first two commands in the autoexec.bat are needed to setup 80 columns and english.
+
+MAME276 command line:
+
+mame orionz80 -flop1 "[path to cpm boot disk image]" -bios m33zrkd -window -skip_gameinfo
