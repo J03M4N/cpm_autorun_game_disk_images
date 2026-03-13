@@ -1,0 +1,39 @@
+terminal: ADM-31
+
+Cpmtools diskdef:
+
+diskdef mz2000
+seclen 256
+tracks 80
+sectrk 16
+blocksize 2048
+maxdir 64
+skew 1
+boottrk 4
+os 2.2
+end
+
+HxC raw .IMG:
+
+40      number_of_track       
+2       number_of_side       
+IBM_MFM format       
+1       start_sector_id       
+16      sector_per_track       
+256     sector_size       
+0       formatvalue       
+255     gap3       
+250000  bitrate       
+0       pregap       
+300     rpm 
+
+Source cpm boot disk image from MAME software list.
+      
+Workflow: load .D88 boot image in HxC, export to .IMG, edit .IMG with CPMtoolsGUI, reload .IMG in HxC, export to .IMD.
+
+Autorun: Standard autorun was setup to run "setup -g", keyboard wouldn't work without it. I hexedited image and replaced "setup -g" with "submit profile". It works, must start with "setup -g" in first line of PROFILE.SUB
+
+
+MAME276 command line:
+
+mame mz2000 -flop1 "[path to cpm boot disk image]" -window -nomaximize -skip_gameinfo
