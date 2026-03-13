@@ -1,0 +1,38 @@
+Terminal: ADM-3A
+
+CPMtools diskdef:
+
+diskdef vixen
+seclen 1024
+tracks 80
+sectrk 5
+blocksize 2048
+maxdir 128
+skew 2
+boottrk 2
+os 2.2
+end
+
+HxC raw .IMG:
+
+40        number_of_track
+2         number_of_side
+IBM_MFM   format
+1         start_sector_id
+5         sector_per_track
+1024      sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source boot disk from MAME software list.
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD.
+
+Autorun: Source boot disk was set to run 'AUTOST". I hexedited it to 'SUB PR' and renamed 'SUBMIT.COM' to 'SUB.COM' and used 'PR.SUB' instead of 'PROFILE.SUB'. 'PR.SUB' must be padded, so extract and edit.
+
+MAME276 command line:
+
+mame vixen -flop1 "[path to CP/M boot disk image]" -window -skip_gameinfo
