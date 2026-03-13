@@ -1,0 +1,39 @@
+Terminal: ADM-3A
+
+CPMtools diskdef:
+
+diskdef x820
+  seclen 128
+  tracks 40
+  sectrk 18
+  blocksize 1024
+  maxdir 32
+  skew 5
+  boottrk 0
+  offset 6912
+  os 2.2
+end
+
+HxC raw .IMG
+
+40       number_of_track
+1        number_of_side
+IBM_FM   format
+1        start_sector_id
+18       sector_per_track
+128      sector_size
+0        formatvalue
+255      gap3
+300000   bitrate
+0        pregap
+300      rpm
+
+Source bootdisk image from MAME software list.
+
+Workflow: Load .IMD in HxC, export to raw .IMG, edit with CPMtoolsGUI, 'Load Raw image' in HxC with values from above, export .IMD.
+
+Autorun: Another system that runs autostart on warmboot, so 'submit profile' won't work. Any autorun app that invokes warmboot at exit or if user invokes ^C, it will loop and restart. I used the autorun from alphatronic.
+
+MAME276 command line:
+
+mame x820 -flop1 "[path to CP/M boot disk image]" -skip_gameinfo -window -nomaximize -autoboot_delay 2 -autoboot_command a\n\n1
