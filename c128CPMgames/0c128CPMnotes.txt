@@ -1,0 +1,18 @@
+Terminal: enhanced ADM-3A with color support
+
+disk images: Ctools.
+
+Workflow: Ctools directly edits .D64 and .D71, no conversion required. For .D81 I used an existing image in VICE emulator and copied files from .D71s prepared by Ctools.
+
+Autostart: CPM3, so SUBMIT PROFILE support is built in, just edit PROFILE.SUB for autostart.
+
+Source cpm boot disk image from:
+https://www.zimmers.net/anonftp/pub/cbm/demodisks/c128/
+
+MAME276 command line:
+
+mame c128 -flop1 "[path to cpm boot disk image]" -skip_gameinfo -window -view "screen 0 standard"
+
+VICE command line:
+
+x128 -80col "[path to cpm boot disk image]"
