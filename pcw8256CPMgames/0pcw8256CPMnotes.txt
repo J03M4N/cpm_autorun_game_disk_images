@@ -1,0 +1,38 @@
+Terminal: VT52?
+
+CPMtools diskdef:
+
+diskdef pcw
+  seclen 512
+  tracks 40
+  sectrk 9
+  blocksize 1024
+  maxdir 64
+  skew 1
+  boottrk 1
+  os 3
+end
+
+HxC raw .IMG
+
+40       number_of_track
+1        number_of_side
+IBM_MFM  format
+1        start_sector_id
+9        sector_per_track
+512      sector_size
+0        formatvalue
+255      gap3
+250000   bitrate
+0        pregap
+300      rpm
+
+Source cpm boot disk image from?
+
+Workflow: Load .IMD with HxC, export .IMG, use cpmtoolsgui to edit .IMG, 'load raw image' in HxC using values from above, export to .IMD
+
+Autostart: CPM3 so already supports SUBMIT PROFILE.
+
+MAME command line:
+
+mame pcw8256 -flop "[path to cpm boot disk image]" -window -skip_gameinfo
