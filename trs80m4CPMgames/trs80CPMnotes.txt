@@ -1,0 +1,11 @@
+Terminal: ADM-3A
+ 
+TRStools for editing disks.
+
+Source cpm boot disk image from: http://cpmarchives.classiccmp.org/trs80/Software/cpm/2006/trs80-cp.htm
+ 
+Workflow: TRStools directly edits .DSK files, no conversion required.
+
+Autostart: Hexedit @ 0x2407, length, autorun filename, 00. (SUBMIT PROFILE might work, but I created these images before I learned that trick).
+
+Emulation: MAME only supports TRS80m2, but the source boot disk is multi-density, so I haven't figured out how to add files to it (or any other multi-density disk). SDLTRS emulator and TRStools only work with TRS80m1,m3,m4. So this disk image set doesn't work with MAME. Use SDLTRS emulator. These images work for models 1,3, and 4. 
