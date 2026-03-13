@@ -1,0 +1,40 @@
+Terminal: Supposedly VT100, some things work perfectly, others won't work at all.
+
+Cpmtools diskdef:
+
+diskdef rainbow
+  seclen 512
+  tracks 80
+  sectrk 10
+  blocksize 2048
+  maxdir 128
+  skew 2
+  boottrk 2
+  #offset 10240
+  os 2.2
+end
+
+HxC raw .IMG:
+
+80       number_of_track  
+1        number_of_side  
+IBM_MFM  format  
+1        start_sector_id  
+10       sector_per_track  
+512      sector_size  
+0        formatvalue  
+255      gap3  
+250000   bitrate  
+0        pregap  
+300      rpm  
+
+Source cpm boot disk images from Daves old computers.
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD.
+
+Autostart: Hexedited to use 'SUBMIT PROFILE'. PROFILE.SUB must be padded, so edit existing file.
+
+MAME276 startup:
+
+mame rainbow -flop1 "[path to cpm boot disk image" -ramsize 640k -autoboot_delay 26 -autoboot_command A -window -view "screen 0 standard"
+	
