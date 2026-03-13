@@ -1,0 +1,43 @@
+Terminal: pc-1715 native one-of-a-Kind.
+
+clear screen  0C
+position      1B (80h offset (3x2 vs 4x3? position of y,x in string)
+erase EOL     16 54
+
+Cpmtools diskdef:
+
+ diskdef 17153
+  seclen 1024
+  tracks 160
+  sectrk 5
+  blocksize 2048
+  maxdir 128
+  skew 0
+  boottrk 4
+  os 3
+end
+
+HxC raw .IMG:
+
+84      tracks
+2       sides
+5       sectors
+1024    sector size
+1       id
+0       format
+ibm mfm type
+255     gap3
+
+Source cpm boot disk image from:
+https://forum.vcfed.org/index.php?threads/cp-m-games.55726/
+
+You must initially run: "bin2imd.com g1715.cpm filename.imd /2 DM=4 N=80 SS=1024 SM=1-5"
+to convert to .IMD
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD. 
+
+Autostart: CPM3, so support for SUBMIT PROFILE already exists.
+
+MAME276 command line:
+
+mame rt1715w -flop1 "[path to cpm boot disk image]" -window -nomaximize -skip_gameinfo
