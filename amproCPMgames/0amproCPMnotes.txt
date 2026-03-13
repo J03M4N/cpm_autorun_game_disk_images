@@ -1,0 +1,38 @@
+Terminal: dumb, so classics like Aliens, Catchum and Ladders etc. that require terminal emulation won't work. "ctrl L" clears screen.
+
+CPMtools diskdef:
+
+diskdef amp1
+  seclen 512     
+  tracks 40      
+  sectrk 10      
+  blocksize 2048 
+  maxdir 64      
+  skew 0         
+  boottrk 2      
+  os 2.2
+end
+
+HxC raw .IMG:
+
+40       number_of_track
+2        number_of_side
+IBM_MFM  format
+17       start_sector_id
+10       sector_per_track
+512      sector_size
+0        formatvalue
+255      gap3
+250000   bitrate
+0        pregap
+300      rpm
+
+Source boot disk from Dave's old computers.
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD.
+
+Autorun: Had to reload image in MAME and select 'write to separate image' create separate .MFM then run 'CONFIG' and set up autorun, then load .MFM in HxC and save as .IMD, then hexedit image, search for autorun value and change to whatever you want to autorun. Another  solution would be to change the name of the file you wish to autorun to match autorun entered in 'CONFIG' I ended up hexediting autorun to 'SUBMIT P' and used 'P.SUB' instead of 'PROFILE.SUB'(not enough spaces for full name) for autorun, 'P.SUB' file must be padded, so edit existing file.
+
+MAME276 command line:
+
+mame ampro -flop1 "[path to CP/M boot disk image]" -window -skip_gameinfo
