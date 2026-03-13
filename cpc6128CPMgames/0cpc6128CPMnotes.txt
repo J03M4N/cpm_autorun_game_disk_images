@@ -1,0 +1,84 @@
+Terminal: CPC
+
+ESC 0 - disable status line
+ESC 1 - enable status line
+ESC 2 - set language
+ESC 3 - set screen mode
+ESC A - cursor up
+ESC B - cursor down
+ESC C - cursor right
+ESC D - cursor left
+ESC E - clear screen and move cursor to home (flakey, use esc H,esc J}
+ESC H - move cursor to home
+ESC I - reverse line feed
+ESC J - erase to end of screen
+ESC K - erase to end of line
+ESC L - insert line
+ESC M - delete current
+ESC N - delete character and move characters up
+ESC Y - set cursor position
+ESC d - erase all above
+ESC b - set foreground
+ESC c - set background (and border)
+ESC e - enable cursor
+ESC f - disable cursor
+ESC j - save cursor pos
+ESC k - restore cursor pos
+ESC l - erase and above cursor
+ESC o - erase current line
+ESC p - invert on
+ESC q - invert off
+ESC r - select bright (recognised but not implemented)
+ESC u - cancel bright (recognised but not implemented)
+ESC v - wrap on
+ESC w - wrap off
+ESC x - mono mode
+ESC y - mono c080 mode
+ESC Y - set cursor position
+Set the cursor position:
+ESC Y <y> <x>
+Coordinates are relative to top-left and are 0 based with 32 added.
+e.g. for x,y of 2,10:
+ESC,'Y',10+32,2+32
+ 
+CPMtools diskdef:
+
+diskdef cpc 
+   seclen 512
+   tracks 42
+   sectrk 9
+   blocksize 1024
+   maxdir 64
+   #skewtab  0,5,1,6,2,7,3,8,4
+   skew 9
+   os 2.2
+   boottrk 2
+   #logicalextents 1
+end
+
+HxC raw .IMG:
+
+42       number_of_track
+1        number_of_side
+IBM_MFM  format
+65       start_sector_id
+9        sector_per_track
+512      sector_size
+0        formatvalue
+255      gap3 
+250000   bitrate
+0        pregap
+300      rpm
+
+Source cpm boot disk image from sblendorio's gorilla-cpm github page:
+https://github.com/sblendorio/gorilla-cpm/tree/master/dists 
+
+Workflow: Cpmtoolsgui has problems with this system, use CIFE instead*. Use HxC 'load image' to convert from .IMD, 'export' to .IMG, edit with CIFE, HxC 'load raw image' .IMG file and 'export' to .IMD.
+
+Autostart: CPM3, so SUBMIT PROFILE automatically supported, SUBMIT.COM must be on boot disk, edit PROFILE.SUB for custom startup.
+
+MAME command line:
+
+mame cpc6128 -flop1 "[path to cpm boot disk image]" -natural -autoboot_delay 3 -autoboot_command "|cpm\n"
+
+*CIFE will not extract files, but Cpmtoolsgui will. Only use Cpmtoolsgui to extract files from .IMG files with this system, no other Cpmtoolsgui operations will work with this system.
