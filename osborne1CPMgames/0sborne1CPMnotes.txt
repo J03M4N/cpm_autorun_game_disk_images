@@ -1,0 +1,53 @@
+Terminal: Osborne 1. Not 80x24, but has a utility to switch, lots of cool proprietary ascii games.
+
+130 ' ---------------- Osborne I Terminal Commands -------------------
+140 '
+150 E$=CHR$(27):'                Escape Character
+160 CLS$=CHR$(26):'              Clear Screen
+170 DC$=E$+"=":'                 Direct Cursor Addressing
+180 GY$=E$+"g":'                 Graphics On
+190 GN$=E$+"G":'                 Graphics Off
+200 HO$=E$+CHR$(1):'            Cursor Home
+210 EP$=E$+"T":'                Erase to End of Line
+220 DY$=E$+")":'                DIM Display On
+230 DN$=E$+"(":'                DIM Display Off
+240 UY$=E$+"l":'                Start Underlining
+250 UN$=E$+"m":'                End Underlining
+
+Cpmtools diskdef:
+
+diskdef osb2
+seclen 1024
+tracks 40
+sectrk 5
+blocksize 1024
+maxdir 64
+skew 1
+boottrk 3
+os 2.2
+end
+
+
+HxC raw .IMG:
+
+40        number_of_track
+1         number_of_side
+IBM_MFM   format
+1         start_sector_id
+5         sector_per_track
+1024      sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source cpm boot disk image from Daves old computers.
+
+Workflow: load source .IMD in HxC, export .IMG, use CPMtoolsGUI to edit .IMG, use 'load raw image' in HxC with values from above, export as .IMD. To run SETUP, load .IMD in HxC, export MFM, boot MAME with MFM, run SETUP, convert back to .IMD with HxC.
+
+Autostart: Hexedit @ or 0x1717 for AUTOST must be 8 characters, (SUB PROF  works, but I created these images before I learned that trick, except solitaire).
+
+MAME276 command line:
+
+mame osborne1 -flop1 "[path to disk image]" -window -skip_gameinfo -autoboot_delay 1 -autoboot_command \n
