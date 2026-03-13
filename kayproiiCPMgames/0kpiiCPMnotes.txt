@@ -1,0 +1,40 @@
+Terminal: Kaypro II
+
+CPMtools diskdef:
+
+diskdef kay1
+  seclen 512
+  tracks 40
+  sectrk 10
+  secbase 0
+  blocksize 1024
+  maxdir 64
+  dirblks 2
+  skew 1
+  boottrk 1
+  os 2.2
+end
+
+HxC raw .IMG:
+
+40       number_of_track
+1        number_of_side
+IBM_MFM  format
+0        start_sector_id
+10       sector_per_track
+512      sector_size
+0        formatvalue
+255      gap3
+250000   bitrate
+0        pregap
+300      rpm
+
+Source cpm boot disk image from MAME software list.
+
+Workflow: This system won't boot after putting files on bootdisk with CPMtools, use HxC to convert bootdisk to .IMG named 'boot.img', This .IMG is bootable and R/W, create another .IMG file named files.img, use CPMtoolsGUI to add files to files.img, add '-flop2 "[path to files.img]' to MAME command line. Boot MAME and use 'PIP to copy files from B: to A:, copy boot.img and rename to Game.img, use HxC to convert game.img to .IMD file (optional since .IMG files are bootable with this system).
+
+Autostart: Hexedit disk @ 0xF6 to make it autorun , SUBMIT PROFILE works, hexedit bootdisk before workflow and you only need to do it once, then edit PROFILE.SUB, put it on files disk, then copy to boot disk. 
+
+MAME276 command line:
+
+mame kayproii -flop1 "[path to cpm boot disk image]" -window -skip_gameinfo
