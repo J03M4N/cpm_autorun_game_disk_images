@@ -1,0 +1,27 @@
+terminal: ADM-3A
+
+CPMtools diskdefs:
+
+diskdef camputers lynx
+  seclen 512
+  tracks 41
+  sectrk 10
+  blocksize 1024
+  maxdir 64
+  skew 0
+  boottrk 0
+  offset 10240
+  os 2.2
+end
+
+Source cpm boot disk image from MAME software list.
+
+Workflow: load .LDF into HxC, export .IMG, use CPMtoolsGUI to edit .IMG, .IMG file is bootable.
+
+Emulation: The character set is somewhat messed up in MAME.
+
+Autorun: Supposed to use 'AUTOEXEC.BAT', but when edited, it won't work. Changed to 'SUBMIT PROFILE'. Use existing 'PROFILE.SUB' because it must be padded for cpm2.2.
+
+MAME276 command line:
+
+mame lynx128k -flop1 "[path to cpm boot disk image]" -autoboot_delay 2 -autoboot_command "xrom\next boot\n" -window -nomaximize -skip_gameinfo
