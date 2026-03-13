@@ -1,0 +1,27 @@
+terminal: ADM-31
+
+CPMtools diskdef:
+
+# Apple II CP/M skew o Apple II DOS 3.3 skew
+diskdef apple-do
+  seclen 256
+  tracks 35
+  sectrk 16
+  blocksize 1024
+  maxdir 64
+  skewtab 0,6,12,3,9,15,14,5,11,2,8,7,13,4,10,1
+  boottrk 3
+  os 2.2
+end
+
+Workflow: .DSK file can be directly edited with CPMtoolsGUI, no conversion required.
+
+Autorun: I modified startup to use 'PROFILE.SUB', it must be padded, extract existing and edit. 
+
+mame requires applicard in slot 1.
+
+MAME276 command line:
+
+mame apple3 -sl1 applicard -flop1 [path to softcard CP/M boot disk image] -window -skip_gameinfo
+
+
