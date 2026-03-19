@@ -1,0 +1,19 @@
+Terminal: ADM-3A
+ 
+TRStools for editing these .DSK images, I haven't been able to make CPMtools work for this system.
+
+Source cpm boot disk image from: http://cpmarchives.classiccmp.org/trs80/Software/cpm/2006/trs80-cp.htm
+ 
+Workflow: TRStools directly edits these .DSK images. Use HxC to convert to .IMD (or .MFI**) for MAME*. These .DSK images WILL boot in MAME*, but they are R/W and get altered by SUBMIT.COM and certain games that save high scores, which renders them unusable. I tried making the .DSK R/O, but it doesn't work. ONLY USE .IMD (or .MFI**) for MAME*. Normally, I would only include .IMD images, but .IMD (and .MFI**) converted to anything else doesn't work, so I included the .DSK images. You need them to be able to edit, or create new images. 
+
+Autostart: Hexedited for SUBMIT PROFILE. PROFILE.SUB must be padded, so extract and edit existing file.
+
+Emulation: Model 2 is not compatible with Models 1,3 and 4. MAME* supports Model 2, but the source boot disk is multi-density, so I haven't figured out how to add files to it (or any other multi-density disk image). TRStools only works with Models 1,3, and 4. Model 4 now works in MAME*. You can also use the SDLTRS (.DSK only) or TRSGP (.DSK or .IMD) emulators.
+
+MAME276* command line:
+
+mame trs80m4 -flop1 "[path to cpm boot disk .IMD (or .MFI) image]" -window -skip_gameinfo
+
+*DO NOT USE .DSK images in MAME for this system, they WILL boot (only once), then they will be unusable.
+
+**.MFI is R/W, so try it if you want high scores to get saved in MAME. (I haven't tried this, so I'm not sure if things actually get saved.)
