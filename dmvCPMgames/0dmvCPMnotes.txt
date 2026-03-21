@@ -1,0 +1,27 @@
+Terminal ADM-31
+
+Use CPMtools with qx10 images. Check workflow and qx10 notes.
+
+HxC raw .IMG:
+
+42        number_of_track
+2         number_of_side
+IBM_MFM   format
+1         start_sector_id
+8         sector_per_track
+512       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source boot disk image from MAME software list.
+
+Workflow: Use HxC to convert .DSK to .IMG which are R/W and bootable on this system (.MFM may also work). I couldn't get CPMtools to work for this system, but there's a program on the boot disk called EXCHANGE.COM that makes it possible to read disks from different systems. I chose qx10 since I have images for that system. So I have to put my files on a qx10 raw .IMG using CPMtoolsgui, convert that to .MFM (qx10 .IMG won't work during boot) using HxC. Boot DMV with the qx10 .MFM image as drive B:, run EXCHANGE.COM and select qx10, then use PIP to copy files from qx10 .MFM in B drive to DMV boot .IMG in A drive, finally, use HxC with the above values to convert boot .IMG to .IMD (I was lucky to figure this out).
+
+Autostart: There's a CONFIG.COM program on the boot disk that sets up autostart. I set it up as SUBMIT PROFILE. Image can be hexedited, or run CONFIG.COM, to change it.
+
+MAME276 command line:
+
+mame dmv -flop1 "[path to cpm boot disk image]" -skip_gameinfo -window -nomaximize
