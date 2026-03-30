@@ -1,0 +1,45 @@
+Terminal: vt52-ish ^E for clear screen instead of ^H^J, other stuff seems missing.
+
+CPMtools diskdef:
+
+diskdef tim011
+  seclen 1024
+  tracks 160
+  sectrk 5
+  secbase 17
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+80       number_of_track
+2        number_of_side
+IBM_MFM  format
+17       start_sector_id
+5        sector_per_track
+1024     sector_size
+0        formatvalue
+255      gap3
+250000   bitrate
+0        pregap
+300      rpm
+
+Source boot disk image from:
+https://blog.8bitchip.info/tim011-resources/
+
+Workflow: Edit .IMG with CPMtoolsgui, load raw .IMG in HxC using above values, export as .IMD
+
+Autostart: START.COM loads some stuff required. Hexedit it to add more stuff.
+
+MAME286 command line:
+
+mame tim011 -flop1 "[path to cpm boot disk image]" -window -skip_gameinfo
+
+This system will work with 2 drives. Run CONFIG.COM (on TIM011.IMD from website listed above) to set it up for 2 drives, and add the following to the MAME command line:
+
+-fdc:1 35dd -flop2 "[path to 2nd drive image]"
+
