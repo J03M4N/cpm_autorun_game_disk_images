@@ -1,0 +1,47 @@
+Terminal: ADM-3A
+
+Cpmtools diskdef:
+
+diskdef trs80m2 data
+  seclen 1024
+  tracks 77
+  sectrk 8
+  blocksize 2048
+  maxdir 128
+  skew 3
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+77        number_of_track
+1         number_of_side
+IBM_MFM   format
+1         start_sector_id
+8         sector_per_track
+1024      sector_size
+0         formatvalue
+255       gap3
+500000    bitrate
+0         pregap
+300       rpm
+
+Source CP/M boot disk image from:
+https://github.com/pski/model2archive/tree/master
+Source data disk 'deepspace' from:
+https://sourceforge.net/u/robertk-retro/profile/
+
+Workflow: This BOOT disk image is multi-density, and I haven't had any success with CPMtools putting files onto it (or any other multi-density BOOT disk image). I was finally successful using a single density DATA disk image in drive B:, and using PIP.COM to copy from DATA disk image in drive B: to BOOT disk image in drive A:. Load DATA disk image into HxC, export .IMG, edit .IMG with CPMtoolsgui, load raw .IMG into HxC with above settings, export as .IMD. 
+You must load BOOT .IMD into HxC and export as .MFI then use this .MFI as your BOOT disk image because it is R/W in MAME (.IMD is R/O, and .MFM doesn't work with this system). I put PIP.COM, ED.COM. SUBMIT.COM STAT.COM and CONFIG.COM on my source BOOT disk image then used the workflow from above on source BOOT disk image copies to create the autorun game disk images.  You can then convert the completed .MFI to .IMD with HxC.
+
+Autostart: Use CONFIG.COM on the BOOT disk image to set up autostart. I set it up as 'cold boot only' with 'SUBMIT PROFILE' as the autostart command, you can then delete CONFIG.COM. I used ED.COM to create PROFILE.SUB for each image. 
+
+MAME276 command line:
+
+mame trs80m2 -flop1 "[path to CP/M boot image]" -window -skip_gameinfo
+
+MAME276 command line for image creation:
+
+mame trs80m2 -flop1 "[path to CP/M boot image.mfi]" -u6:1 8dsdd -flop2 "[path to CP/M data image.imd]" -window -skip_gameinfo
+
