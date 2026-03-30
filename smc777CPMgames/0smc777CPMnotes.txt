@@ -1,4 +1,5 @@
-terminal: ADM-31...mostly, a few games just won't work right.
+Terminal: ADM-31...mostly, a few games just won't work right, but changed to:
+CLS = ^L and CPOS = ^Y it works. Weird.
 
 Cpmtools diskdef:
 
