@@ -1,0 +1,62 @@
+Terminal: RC702 system specific.
+
+0x01 	Insert line
+0x02 	Delete line
+0x05 	Tab backward (4 chars/tab)
+0x06    x+0x20 y+0x20 	Move cursor to (x,y), x = 0..79, y = 0..24
+0x08 	Move left (backspace)
+0x09 	Tab forward (4 chars/tab)
+0x0A 	Move down (newline)
+0x0C 	Clear screen (form feed)
+0x0D 	Move to position 0 (carriage return)
+0x18 	Move right
+0x1A 	Move up
+0x1D 	Home, move cursor to (0,0)
+0x1E 	Erase to end of line
+0x1F 	Erase to end of screen
+
+The RC702 also supports changing character attributes:
+
+0x80 	Change character attribute
+0x01 	Highlight
+0x02 	Blink
+0x04 	Semi-graphic character set
+0x10 	Reverse
+0x20 	Underline
+
+CPMtools diskdef:
+
+diskdef rc702
+  seclen 512
+  tracks 70
+  sectrk 9
+  blocksize 2048
+  maxdir 128
+  offset 18432
+  skew 2
+  boottrk 0
+  os 2.2
+end
+
+HxC raw .IMG:
+
+35       number_of_tracks
+2        number_of_side
+IBM_MFM  format
+1        start_sector_id
+9        sector_per_track
+512      sector_size
+0        formatvalue
+255      gap3
+500000   bitrate
+0        pregap
+300      rpm
+
+Source CP/M boot disk from: Michael Ringgaard's website (Thank you Michael)
+https://www.jbox.dk/rc702/disks.shtm
+
+Workflow: From the website listed above, I downloaded the rc700 emulator that included a boot disk 'RCCPM22.IMD'(56k), also the blank 5.25 floppy image 'BLANK.IMD', the bootable 5.25 floppy 'CPMBLANK.IMD'(56k), the 58k 5.25 system disk 'CPM22.IMD', and 'HTRON.IMD'. There was a garbage file taking up space on the 'RCCPM22.IMD' disk, so I copied PIP, ED, STAT, SUBMIT, and AUTOEXEC COM files from 'RCCPM22.IMD' to the 'CPMBLANK.IMD' for my work BOOT disk. I didn't have any luck manipulating the BOOT disk with CPMtools, so my plan was to try to use 'HTRON.IMD' as a DATA disk. I loaded 'HTRON.IMD' into HxC and exported the .XML (this is how I get the HxC raw .IMG settings), and the .IMG. Using the 'diskdef' from above (Thanks to Larry Kraemer for most of these diskdefs), 'HTRON.IMD' yielded a garbage directory, so I decided to try the 'BLANK.IMD', and it worked. I was able to copy files to it using CPMtoolsgui. I Loaded the (no longer)BLANK.IMG into HxC and exported it to .IMD. Then I used it as drive B: DATA disk in the emulator and was able to use PIP to copy the files to the BOOT disk in drive A:(.IMD is R/W with this emulator), SUCCESS! Funny thing is, it turns out that the .XML generated from loading the 'BLANK.IMD' into HxC was totally different than the one from 'HTRON.IMD", and it wouldn't work (probably, BLANK.IMD needed a different diskdef), so my 'happy accident' of using the 'HTRON.IMD' .XML with 'BLANK.IMD' led to success with this system. PURE LUCK. If it works, it works!
+
+Autostart: AUTOEXEC.COM sets up autostart with this system on 56k disk images and allows a choice between just cold boot, and cold and warm boot, if you just hexedit the image it defaults to cold and warm boot. I set it up for cold boot only with SUBMIT PROFILE as the startup command. I used ED.COM to create PROFILE.SUB. I had one game that wouldn't run because 'not enough memory', so I tried it with the 58k BOOT disk, and it worked! But, unfortunately, AUTOEXEC.COM doesn't work on the 58k image, and it defaults to cold and warm boot, so I ended up using AUTOEX.COM from Alphatronic. I hexedited AUTOEX.COM to start my chosen file, and the boot disk image to autostart AUTOEX.COM.
+
+MAME276 won't boot this system, so use the emulator 'RC700' from Michael Ringgaard's website listed above.
