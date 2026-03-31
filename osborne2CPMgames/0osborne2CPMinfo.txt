@@ -1,0 +1,38 @@
+Terminal: ADM-3A
+
+CPMtools diskdef:
+
+diskdef osb2
+seclen 1024
+tracks 40
+sectrk 5
+blocksize 1024
+maxdir 64
+skew 1
+boottrk 3
+os 3
+end
+
+HxC raw .IMG:
+
+40         number_of_track
+1          number_of_side
+IBM_MFM    format
+1          start_sector_id
+5          sector_per_track
+1024       sector_size
+0          formatvalue
+255        gap3
+250000     bitrate
+0          pregap
+300        rpm
+
+Source CP/M boot disk image from: Dave's old computers.
+
+Workflow: Load .IMD in HxC, export raw .IMG, edit with CPMtoolsgui, 'load raw image' with .IMG in HxC using above values, export to .IMD.
+
+Autostart: CPM 3 so support for SUBMIT PROFILE built into system.
+
+MAME286 command line:
+
+mame osbexec -flop1 "[path to cpm boot disk image]" -window -skip_gameinfo -autoboot_delay 5 -autoboot_command \n
