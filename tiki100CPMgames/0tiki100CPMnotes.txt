@@ -1,0 +1,25 @@
+Terminal: ADM-3A Use 80ADM.COM from KPM115.DSK for ADM-3A terminal emulation. Native terminal emulation is very hard to get right.
+
+CPMtools diskdef:
+
+diskdef tiki100
+  seclen 256
+  tracks 80
+  sectrk 10
+  blocksize 1024
+  maxdir 64
+  offset 10240
+  skew 1
+  boottrk 0
+  os 2.2
+end
+
+Source kp/m boot disk from: MAME software list.
+
+Workflow: Put 80ADM.COM from KPM115.DSK onto INVADER.DSK boot disk for ADM-3A terminal emulation. Edit with CPMtoolsgui which reads these .DSK files directly, no conversion required.
+
+Autostart: INVADER.DSK is an autostart boot disk that uses the KP/M version of SUBMIT PROFILE. Edit TEKSD.SUB, Change top line from '40' to '80ADM' to set up ADM-3A emulation, put your desired autostart filename without .COM on second line.
+
+MAME286 command line:
+
+mame tiki100 -flop1 "[path to kp/m boot disk image]" -natural -window -skip_gameinfo
