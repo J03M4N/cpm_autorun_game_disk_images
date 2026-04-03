@@ -1,0 +1,43 @@
+Terminal: VT52 works for everything I tried EXCEPT CATCHUM and LADDER. I was able to make them work using CATCONF.COM and/or LADCONF.COM and selecting HEATH. The .DAT files generated look NOTHING like VT52.
+
+CPMtools diskdef:
+
+diskdef zenheath
+  seclen 256
+  tracks 80
+  sectrk 16
+  blocksize 2048
+  maxdir 128
+  offset 8192
+  skew 1
+  boottrk 0
+  os 2.2
+end
+
+HxC raw .IMG:
+
+80        number_of_track
+1         number_of_side
+IBM_MFM   format
+1         start_sector_id
+16        sector_per_track
+256       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source cp/m boot disk image from?
+
+Workflow: cpm2204s.td0 is a setup disk. Use HxC to convert a copy of HOS8719A.IMD to .MFM. Use .td0 as flop1 and .MFM as flop2, start emulator, setup runs automatically, choose 96 for drive density. select original .IMD for file source. .MFM is now the boot disk. Use HxC to convert .MFM to .IMG, edit .IMG with CPMtoolsgui, convert .IMG with 'Load Raw image' in HxC using above values, export as .MFM (R/O .IMD doesn't work with this system without errors).
+
+Autostart: Hexedited source for SUBMIT PROFILE. works perfectly.
+
+MAME286 command line:
+
+mame h89 -flop1 "path to cp/m boot disk image" -window -skip_gameinfo
+
+add this to command line for second drive during setup:
+
+-flop2 "[path to data disk image]"
