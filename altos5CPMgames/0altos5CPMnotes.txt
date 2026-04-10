@@ -1,0 +1,50 @@
+Terminal: Dumb using MAME default, but wy50 connected through bitbanger provides ADM-3A emulation.
+
+CPMtools diskdef:
+
+diskdef alt5
+  seclen 512
+  tracks 160
+  sectrk 9
+  blocksize 4096
+  maxdir 177
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+80        number_of_track
+2         number_of_side
+IBM_MFM   format
+1         start_sector_id
+9         sector_per_track
+512       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source cp/m boot disk image from: Dave's old computers
+
+Workflow: Load .TD0 into HxC, export to raw .IMG, edit with CPMtoolsgui, 'Load Raw image' into into HxC with above values, export .IMD.
+
+Autostart: This system runs autostart on both warm and cold boot, so SUBMIT PROFILE won't work. Used AUTOEX.COM from Alphatronic. Hexedit BOOT disk image to autorun AUTOEX, hexedit AUTOEX.COM with filename you wish to start. On games that require 2 words to start, I hexedited BOOT disk image to directly start, bypassing AUTOEX.COM.
+
+MAME286* command line:
+
+mame altos5 -flop1 "[path to cp/m boot disk image]" -window -autoboot_delay 9 -autoboot_command 1
+
+*Headless systems in MAME are defaulted with a dumb terminal that doesn't support terminal emulation. For games that require terminal emulation I discovered you can run a separate terminal (WY-50) that supports terminal emulation connected via BITBANGER. Games for this setup are in the 'altos5CPMgames/WY50' folder. I use a mame250 'NO-NAG' (from Launchbox) version for smoother launch and because BITBANGER is broken in newer MAME builds. Here is how my .BAT file is setup:
+
+g:
+cd mame250
+start mame altos5 -flop1 "[path to cp/m boot disk image]" -nomax -w -skip_gameinfo -rs232 null_modem -bitb socket.localhost:1234
+start mame wy50 -modem null_modem -bitb socket.localhost:1234 -w -max -skip_gameinfo -autoboot_delay 9 -autoboot_command 1
+
+Sometimes one or the other fails to launch (a bitbanger timing thing?). Just try again.
+
+The WY-50 needs to be reset first time it is launched, Hold G down while launching, this only needs to be done once. Change the settings with SHIFT [ESC], settings are saved with another SHIFT [ESC} then Y.
+
