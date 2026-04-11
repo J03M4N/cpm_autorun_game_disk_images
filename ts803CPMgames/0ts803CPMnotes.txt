@@ -1,0 +1,41 @@
+Terminal: ADM-3A
+
+CPMtools diskdef:
+
+diskdef tel4
+  seclen 256
+  tracks 80
+  sectrk 18
+  blocksize 2048
+  maxdir 64
+  skew 1
+  boottrk 4
+  os 2.2
+end
+
+HxC raw .IMG:
+
+40         number_of_track
+2          number_of_side
+IBM_MFM    format
+1          start_sector_id
+18         sector_per_track
+256        sector_size
+0          formatvalue
+255        gap3
+250000     bitrate
+0          pregap
+300        rpm
+
+Source CP/M boot disk image from: Dave's old computers.
+
+Workflow: 'Load' source BOOT disk into HxC, 'Export' raw .IMG, edit .IMG with CPMtoolsgui using diskdefs from above, Load .IMG with 'Load Raw image' in HxC using above values, 'Export' as .IMD. Tis is another system that files over 16k won't show up in Directory, severely limiting the available games.
+
+Autostart: Run SETUP.COM to change autostart (disk image must be R/W, so use HxC to 'Export' .MFM, boot MAME with .MFM, run SETUP, exit MAME, 'Load' .MFM in HxC, 'Export' raw .IMG, continue with workflow), I changed it to SUBMIT PROFILE. Edit PROFILE.SUB to autostart whichever file you choose.
+
+MAME286* command line:
+
+mame ts803h -flop1 "[path to cp/m boot disk image]" -window -skip_gameinfo
+
+*With the MAME default settings you have to press the keys twice to put character on screen.
+To improve keyboard response, invoke UI, in 'MACHINE CONFIGURATION' change 'TYPEMATIC DELAY' to '.25s' and 'TYPEMATIC RATE' to '2.0cps', not perfect, but better.
