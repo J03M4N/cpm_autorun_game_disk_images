@@ -1,0 +1,38 @@
+Terminal: MAME286 has a new terminal available to the rs232 interface, so VT52 now works.
+
+Cpmtools diskdef:
+
+diskdef wav2
+  seclen 1024
+  tracks 160
+  sectrk 5
+  blocksize 2048
+  maxdir 128
+  skew 1
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+40 tracks
+2 sides
+5 sectors per track
+1024 sector size
+1 sector id
+1 interleave
+1 skew
+250 rpm
+
+Source CP/M boot disk image from: MAME software list.
+
+Workflow: Initially the source boot 'WMB_ORG.IMD' wouldn't boot. I had to 'Load' it in HxC then export as .IMG, 'Load Raw image' with .IMG then 'Export' as .IMD, then it booted.
+load IMD in HxC, save .img, xfer files onto .img with cpmtoolsgui, load raw image in HcX, export IMD, test with emulator
+
+Autostart: CPM3, so 'SUBMIT.COM' works with 'PROFILE.SUB'.
+
+MAME286 command line:
+
+mame wmbullet -window -nomaximize -skip_gameinfo -u55:0 525dd -flop1 "[path to disk image]" -rs232a h19 -rs232a:h19:tlbc imaginator
+
+
