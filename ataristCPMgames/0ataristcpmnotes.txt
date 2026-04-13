@@ -1,0 +1,42 @@
+Terminal: VT52 with GEMDOS extensions.
+
+CPMtools diskdef:
+
+diskdef ataristcpm
+  seclen 512
+  tracks 80
+  sectrk 9
+  blocksize 2048
+  maxdir 128
+  skew 0
+  boottrk 2
+  os 2.2
+end
+
+HxC raw .IMG:
+
+80        number_of_track
+1         number_of_side
+IBM_MFM   format
+1         start_sector_id
+9         sector_per_track
+512       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+298       rpm
+
+Source cp/m boot disk image from: oracle_jedi
+https://forums.atariage.com/topic/307938-atari-st-cpm/#findComment-5030515
+
+Workflow: 'Load' source .HFE into HxC, export as .IMG. (R/O .IMD won't work).
+Edit .IMG with CPMtoolsgui using diskdef from above, 'Load Raw image' in HxC with .IMG using settings from above, 'Export' as .MFM. This system works with .IMGs, but they seem unstable so conversion to .MFM is recommended.
+
+Autostart: I made the Atari ST CP/M emulator autostart using 'INSTALL' in TOS 1.04 (disk image must be R/W, use .IMG, or .MFM). I used CPMtoolsgui to place SUBMIT.COM and PROFILE.SUB onto the game disk images. I don't even know if these disk images are bootable, because of this weird setup they don't need to be. Most of the automation is done through MAME (changing to drive B: and invoking SUBMIT PROFILE). 
+
+
+MAME286 command line:
+
+mame st -bios tos104 -flop "[path to tos cp/m emulator disk image]" -wd1772:1 35dd -flop2 "[path to cp/m game disk image]" -w -skip_gameinfo -autoboot_delay 9 -autoboot_command "\nb:\nsubmit profile\n"
+
