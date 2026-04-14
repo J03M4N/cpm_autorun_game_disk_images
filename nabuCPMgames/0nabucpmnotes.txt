@@ -1,0 +1,42 @@
+Terminal: VT52 using H19 Imaginator through RS232 (except LADDER and CATCHUM require HEATH/HEATH in LADCONF.COM and CATCONF.COM)
+
+CPMtools diskdef:
+
+diskdef nab1
+  seclen 1024
+  tracks 40
+  sectrk 5
+  blocksize 1024
+  maxdir 96
+  skew 2
+  boottrk 1
+  os 3
+end
+
+
+HxC raw .IMG:
+
+40        number_of_track
+1         number_of_side
+IBM_MFM   format
+1         start_sector_id
+5         sector_per_track
+1024      sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source cp/m boot disk image from: NABU MAME WINDOWS
+https://gtamp.com/nabu/
+
+Workflow: Only .IMG files work with this system. Edit .IMG in CPMtoolsgui using diskdef from above.
+
+Autostart: CPM3 so SUBMIT PROFILE works. Edit existing PROFILE.SUB. The top 2 lines must be there to redirect output to 80 column terminal. DEVICE.COM must be on boot disk.
+
+MAME command line:
+
+mame nabupc -w -skip_gameinfo -bios ver17 -option1 fdc -flop1 "[path to cp/m boot disk image]" -option4 rs232 -option4:rs232:rs232 h19 -option4:rs232:rs232:h19:tlbc imaginator -autoboot_delay 15 -autoboot_command "\n" -view "screen 1 standard"
+
+For 40 column games change to -view "screen 0 standard" For both screens, remove view option.
