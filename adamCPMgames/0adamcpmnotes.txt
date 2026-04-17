@@ -1,0 +1,11 @@
+Terminal: ADM-3A
+
+To edit disk images use 'Adam Image Manager':
+https://adamarchive.org/archive/?dir=/PC-warez%2FUtilities
+
+Workflow: Just use Adam Image Manager, no conversion necessary. Use 1.1.1, I had problems with 1.1.6
+
+Autostart: This system uses TDOS for 80 columns, it supports CP/M 2.2, but has no 80 column support, so I've used TDOS for these images. SUBMIT PROFILE works, but there's a problem with 'Smartkeys' hogging 3 screen lines. It's easy to turn off the 'Smartkeys' display using '[SHIFT] F8', but, unfortunately, I haven't found a way to automate that key combination (maybe it could be done in MAME with a .LUA script, but MAME doesn't yet work in 80 columns with this system). So the Autostart process for this system is somewhat compromised.
+
+Emulation: I used 'Virtual Adam'. In the 'System' tab under 'video' 'Emulation Settings' check the box for '80 column TDOS', under 'Vertual Adam' check box for 'Run copies instead of actual images' (to protect images, if you want high scores, and other stuff saved to disk, use copies and uncheck box).
+
