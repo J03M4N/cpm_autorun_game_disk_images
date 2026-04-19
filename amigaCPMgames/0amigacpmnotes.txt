@@ -1,0 +1,25 @@
+Terminal: VT52
+
+CPMtools diskdef:
+
+diskdef amiga
+  seclen 128
+  tracks 160
+  sectrk 44
+  blocksize 2048
+  maxdir 128
+  boottrk 8
+  os 2.2
+end
+
+Source boot disk:
+https://eab.abime.net/showpost.php?p=1690022&postcount=28
+This Bootdisk starts the Amiga in CP/M 68k and contains an 8080 emulator (COM.68K). Nothing Z80 works, so only half the games worked.
+
+Workflow: Edit .ADF cp/m disks directly with CPMtoolsgui using above diskdef. No conversion needed.
+
+Autostart: No autostart. There is no SUBMIT.COM, but .SUB files run. I put startup commands in PROFILE.SUB and automated it with MAME autoboot. To invoke the 8080 emulator, you use COM FILENAME(Filename without .COM suffix).
+
+Mame286 command line:
+
+mame a600 -w -skip_gameinfo -flop1 "[path to cp/m boot disk image]" -autoboot_delay 9 -autoboot_command "profile\n"
