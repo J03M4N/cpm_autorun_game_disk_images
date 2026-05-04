@@ -1,0 +1,43 @@
+Terminal: VT52
+
+CPMtools diskdef:
+
+diskdef zx
+  seclen 512
+  tracks 40
+  sectrk 9
+  blocksize 1024
+  maxdir 64
+  skew 1
+  boottrk 1
+  os 2.2
+end
+
+HxC RAW .IMG:
+
+40        number_of_track
+1         number_of_side
+IBM_MFM   format
+1         start_sector_id
+9         sector_per_track
+512       sector_size
+0         formatvalue
+255       gap3
+250000    bitrate
+0         pregap
+300       rpm
+
+Source CP/M boot disk image from:
+https://spectrumcomputing.co.uk/index.php?cat=96&id=23486
+
+Workflow: 'Load' .DSK in HxC, 'Export' .IMG, edit .IMG in CPMtoolsgui using diskdef from above, 'Load Raw image' in HxC using values from above, 'Export' as .IMD
+
+Autostart: Hexedited boot image for SUBMIT PROFILE.
+
+MAME286 command line:
+
+mame specpls3 -flop1 "[path to cp/m boot disk image]" -autoboot_delay 4 -autoboot_command "\n" -skip_gameinfo -w
+
+Add to command line for 2nd disk:
+
+-upd765:1 3ssdd -flop2 "[path to cp/m data disk]"
